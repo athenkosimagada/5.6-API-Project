@@ -20,6 +20,11 @@
             <li><a href="#">+</a></li>
         </ul>
         </nav>
+        <div class="menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
     <div class="hero">
         <h1>Welcome.</h1>
@@ -202,6 +207,12 @@
     const btn2 = document.querySelector('.choice2');
     const btn3 = document.querySelector('.choice3');
 
+    const menu = document.querySelector('.menu');
+    const links = document.querySelector('.nav-links');
+
+    menu.addEventListener('click', () => {
+        links.classList.toggle('show');
+    });
     btn1.addEventListener('click', () => {
         btn.classList.remove('current');
         btn1.classList.add('current');
