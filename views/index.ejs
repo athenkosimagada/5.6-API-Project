@@ -8,46 +8,216 @@
     <title>Document</title>
 </head>
 <body>
-    <main>
-        <div class="conatiner">
-            <nav>
-                <ul>
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">MOVIES</a></li>
-                    <li><a href="#">TV SHOWS</a></li>
-                    <li><a href="#">GENRE</a></li>
-                    <li><a href="#">TOP RATED</a></li>
-                </ul>
-            </nav>
-            <div class="right">
-                <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button type="submit">SEARCH</button>
-                </div>
-                <div class="movies">
-                    <div class="card">
-                        <img src="https://img.cineb.rs/xxrz/250x400/188/f7/97/f7975e92348f8055ee359ea5218d1aa5/f7975e92348f8055ee359ea5218d1aa5.jpg" alt="The Flash">
-                        <p>The Flash</p>
-                        <p>2023 144m</p>
-                    </div>
-                    <div class="card">
-                        <img src="https://img.cineb.rs/xxrz/250x400/188/f7/97/f7975e92348f8055ee359ea5218d1aa5/f7975e92348f8055ee359ea5218d1aa5.jpg" alt="The Flash">
-                        <p>The Flash</p>
-                        <p>2023 144m</p>
-                    </div>
-                    <div class="card">
-                        <img src="https://img.cineb.rs/xxrz/250x400/188/f7/97/f7975e92348f8055ee359ea5218d1aa5/f7975e92348f8055ee359ea5218d1aa5.jpg" alt="The Flash">
-                        <p>The Flash</p>
-                        <p>2023 144m</p>
-                    </div>
-                    <div class="card">
-                        <img src="https://img.cineb.rs/xxrz/250x400/188/f7/97/f7975e92348f8055ee359ea5218d1aa5/f7975e92348f8055ee359ea5218d1aa5.jpg" alt="The Flash">
-                        <p>The Flash</p>
-                        <p>2023 144m</p>
-                    </div>
-                </div>
+   <header>
+    <div class="navbar">
+        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="LOGO">
+        <nav>
+        <ul class="nav-links">
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">TV Shows</a></li>
+            <li><a href="#">People</a></li>
+            <li><a href="#">More</a></li>
+            <li><a href="#">+</a></li>
+        </ul>
+        </nav>
+    </div>
+    <div class="hero">
+        <h1>Welcome.</h1>
+        <p>Millions of movies, TV shows and people to discover. Explore now.</p>
+        <form action="/" method="POST">
+            <div class="form">
+                <input type="text" name="search" placeholder="Search for a movie or tv show title" class="search">
+                <input type="submit" value="Search" class="btn">
+            </div>
+        
+        </form>
+    </div>
+   </header>
+
+   <main class="main">
+    <% if(locals.items && locals.items2) { %>
+    <div class="trending">
+        <div class="top">
+            <h1>Trending</h1>
+            <div class="btn_top">
+                <input type="submit" value="Today" class="btn_toggle choice current">
+                <input type="submit" value="This Week" class="btn_toggle choice1">
             </div>
         </div>
-    </main>
+        <div class="movies">
+            <%if (locals.items) {%>
+                <% for(let i = 0; i < locals.items.length; i++) { %>
+                <div class="movie">
+                    <img src="https://image.tmdb.org/t/p/w500/<%= locals.items[i].poster_path%>" alt="">
+                    <div class="movie-info">
+                        <h3><%= locals.items[i].original_title %></h3>
+                        <% if(locals.items[i].vote_average < 5.0) { %>
+                            <span class="red"><%= locals.items[i].vote_average %></span>
+                        <% } else if(locals.items[i].vote_average >= 5.0 && locals.items[i].vote_average < 8.0) { %>
+                            <span class="orange"><%= locals.items[i].vote_average %></span>
+                        <% } else { %>
+                            <span class="green"><%= locals.items[i].vote_average %></span>
+                        <% } %>
+                        
+                    </div>
+            
+                    <div class="overview">
+                        <%= locals.items[i].overview %>
+                    </div>
+                </div>
+                <% } %>
+                <%}%>
+               <!-- Show any errors that were sent from the backend -->
+               <%if (locals.error) {%>
+                <div id="tag-error" class="tag-error">
+                  <%=error%>
+                </div>
+                <%}%>
+        </div>
+    </div>
+    <div class="trending">
+        <div class="top">
+            <h1>Watch Now!</h1>
+            <div class="btn_top">
+                <input type="submit" value="Movies" class="btn_toggle choice2 current">
+                <input type="submit" value="TV Shows" class="btn_toggle choice3">
+            </div>
+        </div>
+        <div class="movies">
+            <%if (locals.items2) {%>
+                <% for(let i = 0; i < locals.items2.length; i++) { %>
+                <div class="movie">
+                    <img src="https://image.tmdb.org/t/p/w500/<%= locals.items2[i].poster_path%>" alt="">
+                    <div class="movie-info">
+                        <h3><%= locals.items2[i].original_title %></h3>
+                        <% if(locals.items2[i].vote_average < 5.0) { %>
+                            <span class="red"><%= locals.items2[i].vote_average %></span>
+                        <% } else if(locals.items2[i].vote_average >= 5.0 && locals.items2[i].vote_average < 8.0) { %>
+                            <span class="orange"><%= locals.items2[i].vote_average %></span>
+                        <% } else { %>
+                            <span class="green"><%= locals.items2[i].vote_average %></span>
+                        <% } %>
+                        
+                    </div>
+            
+                    <div class="overview">
+                        <%= locals.items2[i].overview %>
+                    </div>
+                </div>
+                <% } %>
+                <%}%>
+               <!-- Show any errors that were sent from the backend -->
+               <%if (locals.error) {%>
+                <div id="tag-error" class="tag-error">
+                  <%=error%>
+                </div>
+                <%}%>
+        </div>
+    </div>
+    <% } else if (locals.items) { %>
+        <div class="trending">
+            <div class="top">
+                <h1>Search Results:</h1>
+                <div class="btn_top">
+                    <input type="submit" value="Movies" class="btn_toggle choice current">
+                    <input type="submit" value="TV Shows" class="btn_toggle choice1">
+                </div>
+            </div>
+            <div class="movies">
+                <%if (locals.items) {%>
+                    <% for(let i = 0; i < locals.items.length; i++) { %>
+                    <div class="movie">
+                        <img src="https://image.tmdb.org/t/p/w500/<%= locals.items[i].poster_path%>" alt="">
+                        <div class="movie-info">
+                            <h3><%= locals.items[i].original_title %></h3>
+                            <% if(locals.items[i].vote_average < 5.0) { %>
+                                <span class="red"><%= locals.items[i].vote_average %></span>
+                            <% } else if(locals.items[i].vote_average >= 5.0 && locals.items[i].vote_average < 8.0) { %>
+                                <span class="orange"><%= locals.items[i].vote_average %></span>
+                            <% } else { %>
+                                <span class="green"><%= locals.items[i].vote_average %></span>
+                            <% } %>
+                            
+                        </div>
+                
+                        <div class="overview">
+                            <%= locals.items[i].overview %>
+                        </div>
+                    </div>
+                    <% } %>
+                    <%}%>
+                   <!-- Show any errors that were sent from the backend -->
+                   <%if (locals.error) {%>
+                    <div id="tag-error" class="tag-error">
+                      <%=error%>
+                    </div>
+                    <%}%>
+            </div>
+        </div>
+    <% }  else { %>
+        <!-- Show any errors that were sent from the backend -->
+        <%if (locals.error) {%>
+            <div id="tag-error" class="tag-error">
+              <%=error%>
+            </div>
+            <%}%>
+    <% } %>
+   </main>
+   <footer>
+    <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="LOGO">
+    <div class="basics">
+        <h3>THE BASICS</h3>
+        <a href="#">About TMDB</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Support Forums</a>
+        <a href="#">API</a>
+        <a href="#">System Status</a>
+    </div>
+    <div class="basics">
+        <h3>GET INVOLVED</h3>
+        <a href="#">Contribution Bible</a>
+        <a href="#">Add New Movie</a>
+        <a href="#">Add New TV Show</a>
+    </div>
+    <div class="basics">
+        <h3>COMMUNITY</h3>
+        <a href="#">Guidelines</a>
+        <a href="#">Discussions</a>
+        <a href="#">Leaderboard</a>
+        <a href="#">Twitter</a>
+    </div>
+    <div class="basics">
+        <h3>LEGAL</h3>
+        <a href="#">Terms of Use</a>
+        <a href="#">API Terms of Use</a>
+        <a href="#">Privacy Policys</a>
+        <a href="#">DMCA Takedown Request</a>
+    </div>
+   </footer>
+
+
+   <script>
+    const btn = document.querySelector('.choice');
+    const btn1 = document.querySelector('.choice1');
+    const btn2 = document.querySelector('.choice2');
+    const btn3 = document.querySelector('.choice3');
+
+    btn1.addEventListener('click', () => {
+        btn.classList.remove('current');
+        btn1.classList.add('current');
+    });
+    btn.addEventListener('click', () => {
+        btn1.classList.remove('current');
+        btn.classList.add('current');
+    });
+    btn3.addEventListener('click', () => {
+        btn2.classList.remove('current');
+        btn3.classList.add('current');
+    });
+    btn2.addEventListener('click', () => {
+        btn3.classList.remove('current');
+        btn2.classList.add('current');
+    });
+   </script>
 </body>
 </html>
