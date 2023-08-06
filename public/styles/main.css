@@ -13,10 +13,12 @@ body {
     background: var(--primary-clr);
     font-family: 'Poppins', sans-serif;
     margin: 0;
+    overflow-x: hidden;
 }
 
 header {
     background: var(--secondary-clr);
+    overflow-x: hidden;
 }
 
 .navbar {
